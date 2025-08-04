@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('abouts', function (Blueprint $table) {
-            $table->id();
-              $table->string('title')->nullable();
-            $table->string('title_2')->nullable();
-            $table->text('description')->nullable();
-            $table->text('description_2')->nullable();
-            $table->string('btn_text')->nullable();
-            $table->string('image')->nullable();
-            $table->timestamps();
+        Schema::table('abouts', function (Blueprint $table) {
+            $table->json('title')->nullable()->change();
+            $table->json('title_2')->nullable()->change();
+            $table->json('description')->nullable()->change();
+            $table->json('description_2')->nullable()->change();
+            $table->json('btn_text')->nullable()->change();
         });
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Hero; // Hero modelini ekle
 use App\Models\Services;
 
+
 class HomeController extends Controller
 {
     public function index()

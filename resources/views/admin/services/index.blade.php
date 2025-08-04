@@ -1,6 +1,96 @@
 @extends('admin.layouts.layout')
 @section('content')
 
+<style>
+/* Service sayfası için özel CSS */
+.custom-file {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  margin-bottom: 0;
+}
+
+.custom-file-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  margin: 0;
+  opacity: 0;
+}
+
+.custom-file-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.custom-file-label::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: block;
+  height: calc(1.5em + 0.75rem);
+  padding: 0.375rem 0.75rem;
+  line-height: 1.5;
+  color: #495057;
+  content: "Gözat";
+  background-color: #e9ecef;
+  border-left: inherit;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+/* Mobilde file input iyileştirmesi */
+@media (max-width: 768px) {
+  .custom-file-label {
+    font-size: 16px; /* iOS'ta zoom'u engeller */
+    padding: 0.75rem 1rem;
+  }
+  
+  .custom-file-label::after {
+    padding: 0.75rem 1rem;
+    font-size: 16px;
+  }
+  
+  /* Form grupları arası boşluk */
+  .form-group {
+    margin-bottom: 2rem;
+  }
+  
+  /* Resim önizleme alanları */
+  .img-fluid {
+    margin-bottom: 1rem;
+  }
+}
+
+/* File input focus durumu */
+.custom-file-input:focus ~ .custom-file-label {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Dosya seçildiğinde label rengi */
+.custom-file-input:lang(tr) ~ .custom-file-label::after {
+  content: "Dosya Seçildi";
+  background-color: #28a745;
+  color: white;
+}
+</style>
+
 
  <section class="section">
           <div class="section-header">
@@ -30,7 +120,7 @@
                       <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">1. Ürün</label>
                     <div class="col-sm-12 col-md-7">
-                        <img class="w-25" src="{{ asset($services->image_1) }}" alt="">
+                        <img class="img-fluid w-100" style="max-width: 300px;" src="{{ asset($services->image_1) }}" alt="">
                     </div>
                 </div>
                 @endif
@@ -60,7 +150,7 @@
                <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">2. Ürün</label>
                     <div class="col-sm-12 col-md-7">
-                        <img class="w-25" src="{{ asset($services->image_2) }}" alt="">
+                        <img class="img-fluid w-100" style="max-width: 300px;" src="{{ asset($services->image_2) }}" alt="">
                     </div>
                 </div>
             @endif
@@ -90,7 +180,7 @@
                      <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">3. Ürün</label>
                     <div class="col-sm-12 col-md-7">
-                        <img class="w-25" src="{{ asset($services->image_3) }}" alt="">
+                        <img class="img-fluid w-100" style="max-width: 300px;" src="{{ asset($services->image_3) }}" alt="">
                     </div>
                 </div>
                 @endif
@@ -124,7 +214,7 @@
                      <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">4. Ürün</label>
                     <div class="col-sm-12 col-md-7">
-                        <img class="w-25" src="{{ asset($services->image_4) }}" alt="">
+                        <img class="img-fluid w-100" style="max-width: 300px;" src="{{ asset($services->image_4) }}" alt="">
                     </div>
                 </div>
                 @endif
@@ -176,5 +266,58 @@
           </div>
         </section>
 
+<script>
+$(document).ready(function() {
+  // File input iyileştirmeleri
+  $('.custom-file-input').on('change', function() {
+    var fileName = $(this).val().split('\\').pop();
+    $(this).next('.custom-file-label').html(fileName || 'Resim Seç');
+    
+    // Dosya seçildiğinde sayfanın üste atmasını engelle
+    if ($(window).width() <= 768) {
+      var $formGroup = $(this).closest('.form-group');
+      var currentScroll = $(window).scrollTop();
+      
+      setTimeout(function() {
+        $('html, body').animate({
+          scrollTop: $formGroup.offset().top - 100
+        }, 300);
+      }, 100);
+    }
+  });
+  
+  // Form submit sırasında scroll pozisyonunu koru
+  $('form').on('submit', function() {
+    if ($(window).width() <= 768) {
+      sessionStorage.setItem('serviceScrollPosition', $(window).scrollTop());
+    }
+  });
+  
+  // Sayfa yüklendiğinde scroll pozisyonunu geri yükle
+  if (sessionStorage.getItem('serviceScrollPosition')) {
+    setTimeout(function() {
+      $(window).scrollTop(sessionStorage.getItem('serviceScrollPosition'));
+      sessionStorage.removeItem('serviceScrollPosition');
+    }, 200);
+  }
+  
+  // Custom file label tıklama iyileştirmesi
+  $('.custom-file-label').on('click', function(e) {
+    e.preventDefault();
+    $(this).prev('.custom-file-input').click();
+  });
+  
+  // Mobilde form elemanları için touch iyileştirmesi
+  $('input, textarea, select').on('focus', function() {
+    if ($(window).width() <= 768) {
+      setTimeout(function() {
+        $('html, body').animate({
+          scrollTop: $(this).offset().top - 100
+        }, 300);
+      }.bind(this), 100);
+    }
+  });
+});
+</script>
 
 @endsection

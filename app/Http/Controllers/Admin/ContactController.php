@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Quote;
 use Illuminate\Http\Request;
+use Stichoza\GoogleTranslate\GoogleTranslate;
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -13,9 +16,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contact = Contact::find(1); // id'yi 1'e sabitledik
+        $contact = Contact::find(1);
         $messages = Contact::whereNotNull('message')->where('id', '!=', 1)->orderByDesc('created_at')->get();
-        return view('admin.contact.index', compact('contact', 'messages'));
+        $quotes = Quote::orderByDesc('created_at')->get();
+        return view('admin.contact.index', compact('contact', 'messages', 'quotes'));
     }
 
     /**
@@ -31,6 +35,9 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
+        // Debug için log ekleyelim
+        Log::info('Contact form submitted', $request->all());
+        
         $request->validate([
             'name'    => 'required|max:100',
             'email'   => 'required|email',
@@ -38,14 +45,47 @@ class ContactController extends Controller
             'message' => 'required|max:1000',
         ]);
 
-        Contact::create([
-            'name'    => $request->name,
-            'email'   => $request->email,
-            'phone'   => $request->phone,
-            'message' => $request->message,
+        try {
+            $contact = Contact::create([
+                'name'    => $request->name,
+                'email'   => $request->email,
+                'phone'   => $request->phone,
+                'message' => $request->message,
+            ]);
+            
+            Log::info('Contact message saved successfully', ['id' => $contact->id]);
+            
+            return redirect()->back()->with('success', 'Mesajınız başarıyla gönderildi.');
+        } catch (\Exception $e) {
+            Log::error('Contact message save failed', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Mesaj gönderilirken bir hata oluştu: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Quote form için store method
+     */
+    public function storeQuote(Request $request)
+    {
+        $request->validate([
+            'name'         => 'required|max:100',
+            'company_name' => 'nullable|max:100',
+            'phone'        => 'required|max:20',
+            'email'        => 'required|email',
+            'service'      => 'nullable|max:100',
+            'message'      => 'nullable|max:1000',
         ]);
 
-        return redirect()->back()->with('success', 'Mesajınız başarıyla gönderildi.');
+        Quote::create([
+            'name'         => $request->name,
+            'company_name' => $request->company_name,
+            'phone'        => $request->phone,
+            'email'        => $request->email,
+            'service'      => $request->service,
+            'message'      => $request->message,
+        ]);
+
+        return redirect()->back()->with('success', 'Teklif talebiniz başarıyla gönderildi.');
     }
 
     /**
@@ -68,6 +108,16 @@ class ContactController extends Controller
     }
 
     /**
+     * Quote silme
+     */
+    public function destroyQuote($id)
+    {
+        $quote = Quote::findOrFail($id);
+        $quote->delete();
+        return redirect()->back()->with('success', 'Teklif talebi silindi.');
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
@@ -80,7 +130,6 @@ class ContactController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // id parametresini kullanma, doğrudan 1 olarak al
         $request->validate([
             'title'             => ['required', 'max:200'],
             'description'       => ['required', 'max:500'],
@@ -90,22 +139,59 @@ class ContactController extends Controller
             'phone_description' => ['required', 'max:500'],
             'hour_title'        => ['required', 'max:200'],
             'hour_description'  => ['required', 'max:500'],
-            'name'              => ['nullable', 'max:200'],
-            'email'             => ['nullable', 'email', 'max:200'],
-            'phone'             => ['nullable', 'max:200'],
-            'message'           => ['nullable', 'max:500'],
         ]);
 
-        $contact = Contact::findOrFail(1); // id'yi 1'e sabitledik
+        $contact = Contact::findOrFail(1);
 
-        $contact->title             = $request->input('title');
-        $contact->description       = $request->input('description');
-        $contact->adres_title       = $request->input('adres_title');
-        $contact->adres_description = $request->input('adres_description');
-        $contact->phone_title       = $request->input('phone_title');
-        $contact->phone_description = $request->input('phone_description');
-        $contact->hour_title        = $request->input('hour_title');
-        $contact->hour_description  = $request->input('hour_description');
+        // Basit JSON formatında kaydet - şimdilik sadece Türkçe
+        $contact->title = json_encode([
+            'tr' => $request->input('title'),
+            'en' => $request->input('title'),
+            'ar' => $request->input('title')
+        ]);
+        
+        $contact->description = json_encode([
+            'tr' => $request->input('description'),
+            'en' => $request->input('description'),
+            'ar' => $request->input('description')
+        ]);
+        
+        $contact->adres_title = json_encode([
+            'tr' => $request->input('adres_title'),
+            'en' => $request->input('adres_title'),
+            'ar' => $request->input('adres_title')
+        ]);
+        
+        $contact->adres_description = json_encode([
+            'tr' => $request->input('adres_description'),
+            'en' => $request->input('adres_description'),
+            'ar' => $request->input('adres_description')
+        ]);
+        
+        $contact->phone_title = json_encode([
+            'tr' => $request->input('phone_title'),
+            'en' => $request->input('phone_title'),
+            'ar' => $request->input('phone_title')
+        ]);
+        
+        $contact->phone_description = json_encode([
+            'tr' => $request->input('phone_description'),
+            'en' => $request->input('phone_description'),
+            'ar' => $request->input('phone_description')
+        ]);
+        
+        $contact->hour_title = json_encode([
+            'tr' => $request->input('hour_title'),
+            'en' => $request->input('hour_title'),
+            'ar' => $request->input('hour_title')
+        ]);
+        
+        $contact->hour_description = json_encode([
+            'tr' => $request->input('hour_description'),
+            'en' => $request->input('hour_description'),
+            'ar' => $request->input('hour_description')
+        ]);
+        
         $contact->save();
 
         return redirect()->back()->with('success', 'İletişim ayarları güncellendi.');
@@ -117,6 +203,20 @@ class ContactController extends Controller
     public function show(string $id)
     {
         //
+    }
+
+    private function getTrValue($value) {
+        if (is_array($value)) return $value['tr'] ?? '';
+        if (is_string($value) && $this->isJson($value)) {
+            $arr = json_decode($value, true);
+            return $arr['tr'] ?? '';
+        }
+        return $value;
+    }
+
+    private function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
     }
 }
 

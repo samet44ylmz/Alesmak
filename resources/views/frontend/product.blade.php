@@ -17,7 +17,7 @@
                         	<div class="icon-box">
                             	<span class="icon flaticon-piston"></span>
                             </div>
-                        	<h3><a href="market-single.html">Automotive Manufacturing</a></h3>
+                        	<h3><a href="market-single.html">{{ __('product.automotive') }}</a></h3>
                             <div class="text">Denouncing pleasure ut pain give you a complete...</div>
                             <a class="link-box" href="market-single.html">Go Through <span class="icon flaticon-arrow-pointing-to-right"></span></a>
                         </div>
@@ -34,7 +34,7 @@
                         	<div class="icon-box">
                             	<span class="icon flaticon-demolishing"></span>
                             </div>
-                        	<h3><a href="market-single.html">Industrial Construction</a></h3>
+                        	<h3><a href="market-single.html">{{ __('product.industrial') }}</a></h3>
                             <div class="text">Denouncing pleasure ut pain give you a complete...</div>
                             <a class="link-box" href="market-single.html">Go Through <span class="icon flaticon-arrow-pointing-to-right"></span></a>
                         </div>
@@ -51,7 +51,7 @@
                         	<div class="icon-box">
                             	<span class="icon flaticon-power"></span>
                             </div>
-                        	<h3><a href="market-single.html">Energy and <br> Power</a></h3>
+                        	<h3><a href="market-single.html">{{ __('product.energy') }}</a></h3>
                             <div class="text">Denouncing pleasure ut pain give you a complete...</div>
                             <a class="link-box" href="market-single.html">Go Through <span class="icon flaticon-arrow-pointing-to-right"></span></a>
                         </div>
@@ -68,7 +68,7 @@
                         	<div class="icon-box">
                             	<span class="icon flaticon-flasks"></span>
                             </div>
-                        	<h3><a href="market-single.html">Material <br> Engineering</a></h3>
+                        	<h3><a href="market-single.html">{{ __('product.material') }}</a></h3>
                             <div class="text">Denouncing pleasure ut pain give you a complete...</div>
                             <a class="link-box" href="market-single.html">Go Through <span class="icon flaticon-arrow-pointing-to-right"></span></a>
                         </div>
@@ -85,7 +85,7 @@
                         	<div class="icon-box">
                             	<span class="icon flaticon-valve"></span>
                             </div>
-                        	<h3><a href="market-single.html">Oil & Gas <br> Conservation</a></h3>
+                        	<h3><a href="market-single.html">{{ __('product.oil_gas') }}</a></h3>
                             <div class="text">Denouncing pleasure ut pain give you a complete...</div>
                             <a class="link-box" href="market-single.html">Go Through <span class="icon flaticon-arrow-pointing-to-right"></span></a>
                         </div>
@@ -102,7 +102,7 @@
                         	<div class="icon-box">
                             	<span class="icon flaticon-boat"></span>
                             </div>
-                        	<h3><a href="market-single.html">Marine <br> Transportation</a></h3>
+                        	<h3><a href="market-single.html">{{ __('product.marine') }}</a></h3>
                             <div class="text">Denouncing pleasure ut pain give you a complete...</div>
                             <a class="link-box" href="market-single.html">Go Through <span class="icon flaticon-arrow-pointing-to-right"></span></a>
                         </div>
@@ -119,7 +119,7 @@
                         	<div class="icon-box">
                             	<span class="icon flaticon-scythe"></span>
                             </div>
-                        	<h3><a href="market-single.html">Agriculture <br> Processing</a></h3>
+                        	<h3><a href="market-single.html">{{ __('product.agriculture') }}</a></h3>
                             <div class="text">Denouncing pleasure ut pain give you a complete...</div>
                             <a class="link-box" href="market-single.html">Go Through <span class="icon flaticon-arrow-pointing-to-right"></span></a>
                         </div>
@@ -136,7 +136,7 @@
                         	<div class="icon-box">
                             	<span class="icon flaticon-arched-bridge"></span>
                             </div>
-                        	<h3><a href="market-single.html">Bridge <br> Construction</a></h3>
+                        	<h3><a href="market-single.html">{{ __('product.bridge') }}</a></h3>
                             <div class="text">Denouncing pleasure ut pain give you a complete...</div>
                             <a class="link-box" href="market-single.html">Go Through <span class="icon flaticon-arrow-pointing-to-right"></span></a>
                         </div>
@@ -154,7 +154,7 @@
     	<div class="auto-container">
         	<!--Sec Title-->
             <div class="sec-title centered">
-            	<h2>Other Services</h2>
+            	<h2>{{ __('product.other_services') }}</h2>
                 <div class="separator"></div>
             </div>
             <div class="row clearfix">
@@ -164,7 +164,7 @@
                 	<div class="inner-box">
                     	<h3><a href="#">Power Conditioning <span>services</span></a></h3>
                         <div class="text">Great explorer of the truth, master builder human happiness work one pleasure itself not know...</div>
-                        <a class="read-more" href="#">Read More <span class="icon flaticon-right-arrow-1"></span></a>
+                        <a class="read-more" href="#">{{ __('product.read_more') }} <span class="icon flaticon-right-arrow-1"></span></a>
                     </div>
                 </div>
                 
@@ -173,7 +173,7 @@
                 	<div class="inner-box">
                     	<h3><a href="#">Auxillary System <span>services</span></a></h3>
                         <div class="text">Great explorer of the truth, master builder human happiness work one pleasure itself not know...</div>
-                        <a class="read-more" href="#">Read More <span class="icon flaticon-right-arrow-1"></span></a>
+                        <a class="read-more" href="#">{{ __('product.read_more') }} <span class="icon flaticon-right-arrow-1"></span></a>
                     </div>
                 </div>
                 
@@ -182,7 +182,7 @@
                 	<div class="inner-box">
                     	<h3><a href="#">Emission & Exhaust <span>services</span></a></h3>
                         <div class="text">Great explorer of the truth, master builder human happiness work one pleasure itself not know...</div>
-                        <a class="read-more" href="#">Read More <span class="icon flaticon-right-arrow-1"></span></a>
+                        <a class="read-more" href="#">{{ __('product.read_more') }} <span class="icon flaticon-right-arrow-1"></span></a>
                     </div>
                 </div>
                 
@@ -191,7 +191,7 @@
                 	<div class="inner-box">
                     	<h3><a href="#">Circuit Breaker <span>services</span></a></h3>
                         <div class="text">Great explorer of the truth, master builder human happiness work one pleasure itself not know...</div>
-                        <a class="read-more" href="#">Read More <span class="icon flaticon-right-arrow-1"></span></a>
+                        <a class="read-more" href="#">{{ __('product.read_more') }} <span class="icon flaticon-right-arrow-1"></span></a>
                     </div>
                 </div>
                 
@@ -257,7 +257,7 @@
             </div> 
         </div> 
       </div> 
-      <a href="index.html" class="backhome">Back to Home <span class="icon flaticon-arrow-pointing-to-right"></span></a>
+      <a href="{{ route('home') }}" class="backhome">Back to Home <span class="icon flaticon-arrow-pointing-to-right"></span></a>
     </div>
     <!-- End of Quote box -->
 

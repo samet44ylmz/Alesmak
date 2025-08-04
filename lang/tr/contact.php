@@ -1,0 +1,20 @@
+<?php
+return [
+    'title' => 'İletişim',
+    'visit_location' => 'Lokasyonumuzu Ziyaret Edin',
+    'send_message' => 'Mesaj Gönder',
+    'name' => 'Ad Soyad',
+    'email' => 'E-Posta',
+    'phone' => 'Telefon',
+    'message' => 'Mesajınız',
+    'home' => 'Anasayfa',
+    'about' => 'Hakkımızda',
+    'products' => 'Ürünler',
+    'contact' => 'İletişim',
+    'get_quote' => 'Teklif Al',
+    'quote_description' => 'Endüstriyel ve mühendislik çözümleriniz için ücretsiz teklif alın, 7/24 buradayız.',
+    'company' => 'Şirket Adı',
+    'select_service' => 'İhtiyaç Duyulan Hizmeti Seçin',
+    'other' => 'Diğer',
+    'send_now' => 'Şimdi Gönder',
+]; 

@@ -8,6 +8,7 @@ use App\Models\Hero;
 use App\Models\Services;
 use Illuminate\Http\Request;
 use File;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class HeroController extends Controller
 {
@@ -62,34 +63,42 @@ class HeroController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'title'     => ['required', 'max:200'],
+            'title'       => ['required', 'max:200'],
             'description' => ['required', 'max:3000'],
-            'image'     => ['max:3000', 'image'],
-            'btn_text' => ['required', 'max:500'],
+            'btn_text'    => ['required', 'max:500'],
+            'image'       => ['nullable', 'image', 'max:3000'],
         ]);
 
-        $hero = Hero::find($id); // düzeltildi
+        $hero = Hero::findOrFail($id);
 
         if ($request->hasFile('image')) {
-            if ($hero && File::exists(public_path($hero->image))) {
-                File::delete(public_path($hero->image));
+            if ($hero->image && file_exists(public_path($hero->image))) {
+                unlink(public_path($hero->image));
             }
             $image = $request->file('image');
-            $imageName = rand() . $image->getClientOriginalName();
-            $image->move(public_path('/uploads'), $imageName);
-            $imagePath = "/uploads/" . $imageName;
+            $imageName = time().'_'.$image->getClientOriginalName();
+            $image->move(public_path('uploads'), $imageName);
+            $imagePath = '/uploads/' . $imageName;
         }
 
-        Hero::updateOrCreate(
-            ['id' => $id],
-            [
-                'title'     => $request->title,
-                'description' => $request->description,
-                'btn_text'  => $request->btn_text,             
-                'image'     => isset($imagePath) ? $imagePath : ($hero ? $hero->image : null),
-            ]
-        );
-        return redirect()->back();
+        $trTitle = $this->getTrValue($request->input('title'));
+        $enTitle = GoogleTranslate::trans($trTitle, 'en', 'tr');
+        $arTitle = GoogleTranslate::trans($trTitle, 'ar', 'tr');
+        $trDesc = $this->getTrValue($request->input('description'));
+        $enDesc = GoogleTranslate::trans($trDesc, 'en', 'tr');
+        $arDesc = GoogleTranslate::trans($trDesc, 'ar', 'tr');
+        $trBtn = $this->getTrValue($request->input('btn_text'));
+        $enBtn = GoogleTranslate::trans($trBtn, 'en', 'tr');
+        $arBtn = GoogleTranslate::trans($trBtn, 'ar', 'tr');
+
+        $hero->update([
+            'title'       => json_encode(['tr' => $trTitle, 'en' => $enTitle, 'ar' => $arTitle]),
+            'description' => json_encode(['tr' => $trDesc, 'en' => $enDesc, 'ar' => $arDesc]),
+            'btn_text'    => json_encode(['tr' => $trBtn, 'en' => $enBtn, 'ar' => $arBtn]),
+            'image'       => $imagePath ?? $hero->image,
+        ]);
+
+        return redirect()->back()->with('success', 'Güncelleme başarılı.');
     }
 
     /**
@@ -98,5 +107,19 @@ class HeroController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    private function getTrValue($value) {
+        if (is_array($value)) return $value['tr'] ?? '';
+        if (is_string($value) && $this->isJson($value)) {
+            $arr = json_decode($value, true);
+            return $arr['tr'] ?? '';
+        }
+        return $value;
+    }
+
+    private function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
     }
 }

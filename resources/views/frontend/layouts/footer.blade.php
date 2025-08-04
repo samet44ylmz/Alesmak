@@ -1,80 +1,48 @@
-  <footer class="main-footer">
-    	<div class="auto-container">
-        	<!--Widgets Section-->
-            <div class="widgets-section">
-            	<div class="row clearfix">
-                	
-                    <!--Column-->
-                    <div class="column col-md-5 col-sm-6 col-xs-12">
-						<div class="footer-widget logo-widget">
-							<div class="logo">
-                            	<a href="index.html"><img src="{{ asset('frontend/assets/images/footer-logo.png') }}" alt="" /></a>
-                            </div>
-                            <div class="widget-content">
-                            	<div class="text">Global Street 5004, Newyork, United States.</div>
-                                <ul class="list">
-                                	<li>+0 625-07520-6644 </li>
-                                    <li>Mailus@Metroindustry.com</li>
-                                </ul>
-                                <div class="timing">
-                                	<span>Visit Our Office:</span>Monday - Satday: 9.00am to 5.00pm
-                                </div>
-                            </div>
+<footer class="main-footer">
+    <div class="auto-container">
+        <!--Widgets Section-->
+        <div class="widgets-section">
+            <div class="row clearfix">
+                
+                <!--Column-->
+                <div class="column col-md-6 col-sm-6 col-xs-12">
+                    <div class="footer-widget logo-widget">
+                        <div class="logo">
+                            <a href="{{ route('home') }}"><img src="{{ asset('images/alesmaklogo.png') }}" alt="ALESMAK Logo" style="height: 70px; width: auto; background: transparent;"></a>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="list">
+                                <li>+90 530 470 26 53 </li>
+                                <li>Vatan Mah. Ar Sok. Güldallar 11 San. Sit. No: 23 Bayrampaşa - İSTANBUL / TÜRKİYE</li>
+                            </ul>
                         </div>
                     </div>
-                    
-                    <!--Column-->
-                    <div class="column col-md-4 col-sm-6 col-xs-12">
-						<div class="footer-widget links-widget">
-                        	<div class="footer-title">
-                            	<h2>Usefull Links</h2>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="column col-md-6 col-sm-6 col-xs-12">
-                                	<ul class="links">
-                                    	<li><a href="about.html">Hakkımızda</a></li>
-                                        <li><a href="#">Meet Our Team</a></li>
-                                        <li><a href="#">Case Studies</a></li>
-                                        <li><a href="#">Get a Quote</a></li>
-                                        <li><a href="#">Testimonials</a></li>
-                                        <li><a href="#">İletişim</a></li>
-                                    </ul>
-                                </div>
-                                <div class="column col-md-6 col-sm-6 col-xs-12">
-                                	<ul class="links">
-                                    	<li><a href="market-sectors.html">Ürünler</a></li>
-                                        <li><a href="#">Industries</a></li>
-                                        <li><a href="#">News</a></li>
-                                        <li><a href="#">Why Choose Us</a></li>
-                                        <li><a href="#">Sustainability</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!--Column-->
-                    <div class="column col-md-3 col-sm-6 col-xs-12">
-						<div class="footer-widget material-widget">
-                        	
-                           
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-        	<div class="auto-container">
-                <div class="row clearfix">
-                    
-                   
-                    </div>
-                    
                 </div>
                 
-                <div class="copyright">Copyright © 2025 <a href="#">The Metron Industry</a> Theme by <a href="#">Themekalia.</a> All rights reserved.</div>
+                <!--Column-->
+                <div class="column col-md-6 col-sm-6 col-xs-12">
+                    <div class="footer-widget map-widget">
+                        <div class="footer-title">
+                            <h2>Konum</h2>
+                        </div>
+                        <div class="map-container" style="height: 200px; width: 100%;">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.707178180963!2d28.904022977445816!3d41.03166187134715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caba5ff41aaaab%3A0xfe2cc8b361c2da26!2sG%C3%BCldallar%2011.%20Sanayi%20Sitesi!5e0!3m2!1str!2str!4v1750276158208!5m2!1str!2str"
+                                width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
                 
             </div>
         </div>
-    </footer>
+    </div>
+    <div class="footer-bottom">
+        <div class="auto-container">
+            <div class="row clearfix">
+            </div>
+            <div class="copyright">Copyright © 2025 <a href="#">ALESMAK</a> All rights reserved.</div>
+        </div>
+    </div>
+</footer>

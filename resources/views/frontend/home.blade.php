@@ -10,7 +10,7 @@
     <!--End Services Section-->
     
    	<!--market sectors Section-->
-   @include('frontend.sections.market-sectors')
+ 
     <!--End Market Section-->
     
     

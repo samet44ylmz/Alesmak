@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Career;
 use Illuminate\Http\Request;
 use File;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class CareerController extends Controller
 {
@@ -53,37 +54,59 @@ class CareerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'title'     => ['required', 'max:200'],
-            'description' => ['required', 'max:3000'],
-            'image'     => ['max:3000', 'image'],
-            'btn_text' => ['required', 'max:500'],
-        ]);
+   public function update(Request $request, string $id)
+{
+    $request->validate([
+        'title'       => ['required', 'max:200'],
+        'description' => ['required', 'max:3000'],
+        'btn_text'    => ['required', 'max:500'],
+        'image'       => ['nullable', 'image', 'max:3000'],
+    ]);
 
-        $career = Career::find($id);
+    $career = Career::findOrFail($id);
 
-        if ($request->hasFile('image')) {
-            if ($career && File::exists(public_path($career->image))) {
-                File::delete(public_path($career->image));
-            }
-            $image = $request->file('image');
-            $imageName = rand() . $image->getClientOriginalName();
-            $image->move(public_path('/uploads'), $imageName);
-            $imagePath = "/uploads/" . $imageName;
+    if ($request->hasFile('image')) {
+        if ($career->image && file_exists(public_path($career->image))) {
+            unlink(public_path($career->image));
         }
+        $image = $request->file('image');
+        $imageName = time().'_'.$image->getClientOriginalName();
+        $image->move(public_path('uploads'), $imageName);
+        $imagePath = '/uploads/' . $imageName;
+    }
 
-        Career::updateOrCreate(
-            ['id' => $id],
-            [
-                'title'     => $request->title,
-                'description' => $request->description,
-                'btn_text'  => $request->btn_text,             
-                'image'     => isset($imagePath) ? $imagePath : ($career ? $career->image : null),
-            ]
-        );
-        return redirect()->back();
+    $trTitle = $this->getTrValue($request->input('title'));
+    $enTitle = GoogleTranslate::trans($trTitle, 'en', 'tr');
+    $arTitle = GoogleTranslate::trans($trTitle, 'ar', 'tr');
+    $trDesc = $this->getTrValue($request->input('description'));
+    $enDesc = GoogleTranslate::trans($trDesc, 'en', 'tr');
+    $arDesc = GoogleTranslate::trans($trDesc, 'ar', 'tr');
+    $trBtn = $this->getTrValue($request->input('btn_text'));
+    $enBtn = GoogleTranslate::trans($trBtn, 'en', 'tr');
+    $arBtn = GoogleTranslate::trans($trBtn, 'ar', 'tr');
+
+    $career->update([
+        'title'       => json_encode(['tr' => $trTitle, 'en' => $enTitle, 'ar' => $arTitle]),
+        'description' => json_encode(['tr' => $trDesc, 'en' => $enDesc, 'ar' => $arDesc]),
+        'btn_text'    => json_encode(['tr' => $trBtn, 'en' => $enBtn, 'ar' => $arBtn]),
+        'image'       => $imagePath ?? $career->image,
+    ]);
+
+    return redirect()->back()->with('success', 'Güncelleme başarılı.');
+}
+
+    private function getTrValue($value) {
+        if (is_array($value)) return $value['tr'] ?? '';
+        if (is_string($value) && $this->isJson($value)) {
+            $arr = json_decode($value, true);
+            return $arr['tr'] ?? '';
+        }
+        return $value;
+    }
+
+    private function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
     }
 
     /**

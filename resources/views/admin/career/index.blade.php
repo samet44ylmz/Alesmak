@@ -52,7 +52,7 @@
                 <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Preview Image</label>
                     <div class="col-sm-12 col-md-7">
-                        <img class="w-25" src="{{ asset($career->image) }}" alt="">
+                        <img class="img-fluid w-100" style="max-width: 300px;" src="{{ asset($career->image) }}" alt="">
                     </div>
                 </div>
                @endif
@@ -79,7 +79,6 @@
 
                      
                     
-
 
 
                   </div>

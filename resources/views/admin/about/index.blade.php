@@ -5,7 +5,7 @@
           <div class="section-header">
             <div class="section-header-back">
               <a href="{{ route('dashboard') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-            <h1>Hero Section </h1>
+            <h1>About Section </h1>
             
           </div>
 
@@ -24,10 +24,10 @@
                       @csrf
                       @method('PUT')
 
-                    <div class="form-group row mb-4">
+                                         <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="title" class="form-control" value="{{ $about->title ?? '' }}">
+                        <input type="text" name="title" class="form-control" value="{{ $about->getTranslation('title', 'tr') ?? '' }}">
                       </div> 
                     </div>
 
@@ -35,7 +35,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                       <div class="col-sm-12 col-md-7">
-                        <textarea name="description" id="" class="form-control" style="height: 100px">{{ $about->description ?? '' }}</textarea>
+                        <textarea name="description" id="" class="form-control" style="height: 100px">{{ $about->getTranslation('description', 'tr') ?? '' }}</textarea>
                       </div>
                     </div>
 
@@ -43,7 +43,7 @@
                 <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Preview Image</label>
                     <div class="col-sm-12 col-md-7">
-                        <img class="w-25" src="{{ asset($about->image) }}" alt="">
+                        <img class="img-fluid w-100" style="max-width: 300px;" src="{{ asset($about->image) }}" alt="">
                     </div>
                 </div>
                @endif
@@ -59,17 +59,17 @@
                     </div>
 
                      <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title 2</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="title_2" class="form-control" value="{{ $about->title_2 ?? '' }}">
+                        <input type="text" name="title_2" class="form-control" value="{{ $about->getTranslation('title_2', 'tr') ?? '' }}">
                       </div> 
                     </div>
 
                     <div class="card-body">
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description 2</label>
                       <div class="col-sm-12 col-md-7">
-                        <textarea name="description_2" id="" class="form-control" style="height: 100px">{{ $about->description_2 ?? '' }}</textarea>
+                        <textarea name="description_2" id="" class="form-control" style="height: 100px">{{ $about->getTranslation('description_2', 'tr') ?? '' }}</textarea>
                       </div>
                     </div>
 
@@ -77,7 +77,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Button Text</label>
                       <div class="col-sm-12 col-md-7">
-                         <textarea name="btn_text" id="" class="form-control">{{ $about->btn_text ?? '' }}</textarea>
+                         <textarea name="btn_text" id="" class="form-control">{{ $about->getTranslation('btn_text', 'tr') ?? '' }}</textarea>
                       </div>
                     </div>
 
@@ -92,7 +92,6 @@
 
                      
                     
-
 
 
                   </div>

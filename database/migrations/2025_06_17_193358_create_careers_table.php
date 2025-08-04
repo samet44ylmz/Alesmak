@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('careers', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
-            $table->string('btn_text')->nullable();
-            $table->string('image')->nullable();
-            $table->timestamps();
+        Schema::table('careers', function (Blueprint $table) {
+            $table->json('title')->nullable()->change();
+            $table->json('description')->nullable()->change();
+            $table->json('btn_text')->nullable()->change();
         });
     }
 

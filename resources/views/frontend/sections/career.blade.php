@@ -18,13 +18,13 @@
                 <div class="content-column col-md-6 col-sm-12 col-xs-12">
                 	<div class="inner-column">
                     	<div class="sec-title">
-                        	<h2>{{ $career->title }}</h2>
+                        	<h2>{{ $career->getTranslation('title', app()->getLocale()) }}</h2>
                             <div class="separator centered"></div>
                         </div>
-                        <div class="text">{{ $career->description }}</div>
+                        <div class="text">{{ $career->getTranslation('description', app()->getLocale()) }}</div>
                         {{-- Eğer ekstra alanlar varsa buraya ekleyebilirsiniz --}}
-                        <a class="see_all" href="#">
-                            {{ $career->btn_text  }}
+                        <a class="see_all" href="{{ route('contact') }}">
+                            {{ $career->getTranslation('btn_text', app()->getLocale()) }}
                             <span class="icon flaticon-right-arrow-1"></span>
                         </a>
                     </div>

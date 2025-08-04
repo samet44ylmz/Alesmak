@@ -14,6 +14,23 @@ class Services extends Model
         'title_3',
         'image_3',
         'title_4',
-        'image_4'
+        'image_4',
     ];
+
+    public function getTranslation($field, $locale = null)
+    {
+        $locale = $locale ?: app()->getLocale();
+        $value = $this->{$field};
+        if (is_string($value) && $this->isJson($value)) {
+            $arr = json_decode($value, true);
+            return $arr[$locale] ?? ($arr['tr'] ?? reset($arr));
+        }
+        return $value;
+    }
+
+    private function isJson($string)
+    {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
 }

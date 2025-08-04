@@ -2,15 +2,122 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>The Metron - Industry and Factory HTML Template | Contact</title>
+<title>ALESMAK - Plastik Geri Dönüşüm ve Boru Makinaları | İletişim</title>
+<meta name="description" content="ALESMAK ile iletişime geçin. Plastik geri dönüşüm makinaları, boru üretim hatları ve endüstriyel makine çözümleri için bizimle iletişime geçin.">
+<meta name="keywords" content="ALESMAK iletişim, plastik makinaları, boru üretim hatları, endüstriyel makine">
+<meta name="author" content="ALESMAK">
+<meta name="robots" content="index, follow">
 <!-- Stylesheets -->
 <link href="{{ asset('frontend/assets/css/bootstrap.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/assets/css/style.css') }}" rel="stylesheet">
 <link href="{{ asset('frontend/assets/css/responsive.css') }}" rel="stylesheet">
 <!--<link href="{{ asset('frontend/assets/css/color.css') }}" rel="stylesheet">-->
 
-<link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon.png') }}" type="image/x-icon">
-<link rel="icon" href="{{ asset('frontend/assets/images/favicon.png') }}" type="image/x-icon">
+<style>
+/* Mobilde resimleri küçült ama düzeni koru */
+@media only screen and (max-width: 768px) {
+    /* Resimleri küçült ama düzeni bozma */
+    .gallery-item .image img {
+        max-width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: cover;
+    }
+    
+    /* Galeri düzenini koru */
+    .gallery-item {
+        margin-bottom: 20px;
+    }
+    
+    /* Ürün sayfalarındaki resimler için */
+    .gallery-section .gallery-item .image img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    /* Genel resimler için */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Büyük resimleri mobilde küçült */
+    .image img {
+        max-height: 250px;
+        object-fit: cover;
+    }
+    
+    /* Sol-sağ düzeni koru */
+    .row .col-md-6,
+    .row .col-sm-6 {
+        float: left;
+        width: 50%;
+    }
+    
+    /* İçerik düzenini koru */
+    .content-column,
+    .image-column {
+        float: left;
+        width: 100%;
+    }
+    
+    /* Resim ve yazı yan yana kalması için */
+    .about-section .content-column,
+    .about-section .image-column {
+        width: 50%;
+        float: left;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .gallery-item .image img {
+        max-height: 150px;
+    }
+    
+    .gallery-section .gallery-item .image img {
+        height: 150px;
+    }
+    
+    .image img {
+        max-height: 200px;
+    }
+    
+    /* Küçük ekranlarda da düzeni koru */
+    .row .col-md-6,
+    .row .col-sm-6 {
+        width: 50%;
+        float: left;
+    }
+    
+    .about-section .content-column,
+    .about-section .image-column {
+        width: 50%;
+        float: left;
+    }
+}
+
+/* Admin panelde yazılan metinlerin satır sonlarını koru */
+.text,
+.description,
+.about-section .text,
+.career-section .text,
+.contact-section .text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Özellikle description alanları için */
+.sec-title + .text,
+.widget-content .text,
+.card-body .text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+</style>
+
+<link rel="shortcut icon" href="{{ asset('images/alesmaklogo.png') }}" type="image/x-icon">
+<link rel="icon" href="{{ asset('images/alesmaklogo.png') }}" type="image/x-icon">
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -34,9 +141,8 @@
                 <!--Top Left-->
                 <div class="top-left">
                     <ul class="links clearfix">
-                        <li><a href="#"><span class="icon fa fa-phone"></span>  +0 625-07520-6644</a></li>
-                        <li><a href="#"><span class="icon fa fa-envelope-o"></span>Mailus@Metroindustry.com</a></li>
-                        <li><a href="#"><span class="icon flaticon-placeholder-2"></span>Locate Us</a></li>
+                        <li><a href="#"><span class="icon fa fa-phone"></span>  +90 530 470 26 53</a></li>
+                        <li><a href="#"><span class="icon fa fa-envelope-o"></span>info@alesmakine.com.tr</a></li>
                     </ul>
                 </div>
                 <!--Top Right-->
@@ -44,24 +150,37 @@
                     <ul class="clearfix">
                         <!-- Dil seçenekleri -->
                         <li class="dropdown language">
+                            @php
+                                $locale = app()->getLocale();
+                                $flag = [
+                                    'tr' => 'tr.png',
+                                    'en' => 'gb.png',
+                                    'ar' => 'sa.png',
+                                ];
+                                $langName = [
+                                    'tr' => 'Türkçe',
+                                    'en' => 'English',
+                                    'ar' => 'Arabic',
+                                ];
+                            @endphp
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="https://flagcdn.com/16x12/gb.png" alt="English" style="width:16px; height:12px; margin-right:5px;"> English <span class="caret"></span>
+                                <img src="https://flagcdn.com/16x12/{{ pathinfo($flag[$locale], PATHINFO_FILENAME) }}.png" alt="{{ $langName[$locale] }}" style="width:16px; height:12px; margin-right:5px;"> {{ $langName[$locale] }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('locale', 'tr') }}">
                                         <img src="https://flagcdn.com/16x12/tr.png" alt="Turkish" style="width:16px; height:12px; margin-right:5px;">
                                         Türkçe
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('locale', 'en') }}">
                                         <img src="https://flagcdn.com/16x12/gb.png" alt="English" style="width:16px; height:12px; margin-right:5px;">
                                         English
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('locale', 'ar') }}">
                                         <img src="https://flagcdn.com/16x12/sa.png" alt="Arabic" style="width:16px; height:12px; margin-right:5px;">
                                         Arabic
                                     </a>
@@ -80,7 +199,7 @@
             <div class="outer-container clearfix">
                 <!--Logo Box-->
                 <div class="logo-box">
-                    <div class="logo"><a href="index.html"><img src="{{ asset('frontend/assets/images/logo.png') }}" alt=""></a></div>
+                    <div class="logo"><a href="{{ route('home') }}"><img src="{{ asset('images/alesmaklogo.png') }}" alt="ALESMAK Logo" style="height: 70px; width: auto; background: transparent;"></a></div>
                 </div>
                 <!--Nav Outer-->
                 <div class="nav-outer clearfix">
@@ -96,10 +215,40 @@
                         </div>
                         <div class="navbar-collapse collapse clearfix">
                             <ul class="navigation clearfix">
-                                <li><a href="{{ route('home') }}">Anasayfa</a></li>
-                                <li><a href="{{ route('about') }}">Hakkımızda</a></li>
-                                <li class="dropdown"><a href="{{ route('product') }}">Ürünler</a></li>
-                                <li class="current"><a href="{{ route('contact') }}">İletişim</a></li>
+                                <li><a href="{{ route('home') }}">{{ __('contact.home') }}</a></li>
+                                <li><a href="{{ route('about') }}">{{ __('contact.about') }}</a></li>
+                                <li class="dropdown">
+                                    <a href="{{ route('product') }}">{{ __('contact.products') }} <span class="fa fa-chevron-down" style="font-size:12px;vertical-align:middle;"></span></a>
+                                    <ul>
+                                        <!-- Makine ve Ekipmanlar -->
+                                        <li><a href="{{ route('ekstruder') }}">Ekstruder</a></li>
+                                        <li><a href="{{ route('co-ekstruder-cizgimakinasi') }}">CO Ekstruder-Çizgi Makinası</a></li>
+                                        <li><a href="{{ route('vakum-tanki') }}">Vakum Tankı</a></li>
+                                        <li><a href="{{ route('sprey-tanki') }}">Sprey Tankı</a></li>
+                                        <li><a href="{{ route('cekici-palet') }}">Çekici Palet</a></li>
+                                        <li><a href="{{ route('kesici') }}">Kesici</a></li>
+                                        <li><a href="{{ route('devirme-sehpasi') }}">Devirme Sehpası</a></li>
+                                        <li><a href="{{ route('sarici-makinasi') }}">Sarıcı Makinası</a></li>
+                                        <li><a href="{{ route('yazi-makinasi') }}">Yazı Makinası</a></li>
+                                        <li><a href="{{ route('pvc-makinalari') }}">PVC Makinaları</a></li>
+                                        <li><a href="{{ route('granul-makinalari') }}">Granül Makinaları</a></li>
+                                        <li><a href="{{ route('bant-cekici') }}">Bant Çekici</a></li>
+                                        <li><a href="{{ route('pvc-fitil-havuzu') }}">PVC Fitil Havuzu</a></li>
+                                        <li><a href="{{ route('yedek-ekipmanlar') }}">Yedek Ekipmanlar</a></li>
+                                        
+                                        <!-- Boru Hatları -->
+                                        <li><a href="{{ route('pp-atik-su-boru-hatti') }}">PP Atık Su Boru Hattı</a></li>
+                                        <li><a href="{{ route('pe-boru-hatti') }}">PE Boru Hattı</a></li>
+                                        <li><a href="{{ route('pprc-cam-elyaf-kompozit-boru-hatti') }}">PPRC-Cam Elyaf Kompozit Boru Hattı</a></li>
+                                        
+                                        <!-- Kalıplar -->
+                                        <li><a href="{{ route('kafa-pe-pp-rc-kaliplari') }}">Kafa-PE-PP-RC Kalıpları</a></li>
+                                        <li><a href="{{ route('pvc-kaliplari') }}">PVC Kalıpları</a></li>
+                                        <li><a href="{{ route('yumusak-pvc-kaliplari') }}">Yumuşak PVC Kalıpları</a></li>
+                                        <li><a href="{{ route('kalipreler') }}">Kalipreler</a></li>
+                                    </ul>
+                                </li>
+                                <li class="current"><a href="{{ route('contact') }}">{{ __('contact.contact') }}</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -115,7 +264,7 @@
             <div class="outer-container clearfix">
                 <!--Logo Box-->
                 <div class="logo-box pull-left">
-                    <div class="logo"><a href="index.html"><img src="{{ asset('frontend/assets/images/logo-small.png') }}" alt=""></a></div>
+                    <div class="logo"><a href="{{ route('home') }}"><img src="{{ asset('images/alesmaklogo.png') }}" alt="ALESMAK Logo" style="height: 70px; width: auto; background: transparent;"></a></div>
                 </div>
                 <!--Nav Outer-->
                 <div class="nav-outer clearfix">
@@ -131,10 +280,40 @@
                         </div>
                         <div class="navbar-collapse collapse clearfix">
                             <ul class="navigation clearfix">
-                                <li><a href="{{ route('home') }}">Anasayfa</a></li>
-                                <li><a href="{{ route('about') }}">Hakkımızda</a></li>
-                                <li class="dropdown"><a href="{{ route('product') }}">Ürünler</a></li>
-                                <li class="current"><a href="{{ route('contact') }}">İletişim</a></li>
+                                <li><a href="{{ route('home') }}">{{ __('contact.home') }}</a></li>
+                                <li><a href="{{ route('about') }}">{{ __('contact.about') }}</a></li>
+                                <li class="dropdown">
+                                    <a href="{{ route('product') }}">{{ __('contact.products') }} <span class="fa fa-chevron-down" style="font-size:12px;vertical-align:middle;"></span></a>
+                                    <ul>
+                                        <!-- Makine ve Ekipmanlar -->
+                                        <li><a href="{{ route('ekstruder') }}">Ekstruder</a></li>
+                                        <li><a href="{{ route('co-ekstruder-cizgimakinasi') }}">CO Ekstruder-Çizgi Makinası</a></li>
+                                        <li><a href="{{ route('vakum-tanki') }}">Vakum Tankı</a></li>
+                                        <li><a href="{{ route('sprey-tanki') }}">Sprey Tankı</a></li>
+                                        <li><a href="{{ route('cekici-palet') }}">Çekici Palet</a></li>
+                                        <li><a href="{{ route('kesici') }}">Kesici</a></li>
+                                        <li><a href="{{ route('devirme-sehpasi') }}">Devirme Sehpası</a></li>
+                                        <li><a href="{{ route('sarici-makinasi') }}">Sarıcı Makinası</a></li>
+                                        <li><a href="{{ route('yazi-makinasi') }}">Yazı Makinası</a></li>
+                                        <li><a href="{{ route('pvc-makinalari') }}">PVC Makinaları</a></li>
+                                        <li><a href="{{ route('granul-makinalari') }}">Granül Makinaları</a></li>
+                                        <li><a href="{{ route('bant-cekici') }}">Bant Çekici</a></li>
+                                        <li><a href="{{ route('pvc-fitil-havuzu') }}">PVC Fitil Havuzu</a></li>
+                                        <li><a href="{{ route('yedek-ekipmanlar') }}">Yedek Ekipmanlar</a></li>
+                                        
+                                        <!-- Boru Hatları -->
+                                        <li><a href="{{ route('pp-atik-su-boru-hatti') }}">PP Atık Su Boru Hattı</a></li>
+                                        <li><a href="{{ route('pe-boru-hatti') }}">PE Boru Hattı</a></li>
+                                        <li><a href="{{ route('pprc-cam-elyaf-kompozit-boru-hatti') }}">PPRC-Cam Elyaf Kompozit Boru Hattı</a></li>
+                                        
+                                        <!-- Kalıplar -->
+                                        <li><a href="{{ route('kafa-pe-pp-rc-kaliplari') }}">Kafa-PE-PP-RC Kalıpları</a></li>
+                                        <li><a href="{{ route('pvc-kaliplari') }}">PVC Kalıpları</a></li>
+                                        <li><a href="{{ route('yumusak-pvc-kaliplari') }}">Yumuşak PVC Kalıpları</a></li>
+                                        <li><a href="{{ route('kalipreler') }}">Kalipreler</a></li>
+                                    </ul>
+                                </li>
+                                <li class="current"><a href="{{ route('contact') }}">{{ __('contact.contact') }}</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -152,11 +331,11 @@
 <section class="location-section" style="background-image:url({{ asset('frontend/assets/images/background/pattern-1.png') }})">
     	<div class="auto-container">
         	<ul class="page-breadcrumb">
-            	<li><a href="{{ route('home') }}">Anasayfa</a></li>
-                <li>Hakkımızda</li>
+            	<li><a href="{{ route('home') }}">{{ __('contact.home') }}</a></li>
+                <li>{{ __('contact.about') }}</li>
             </ul>
         	<div class="sec-title centered light">
-            	<h2>Visit Our Location</h2>
+            	<h2>{{ __('contact.visit_location') }}</h2>
                 <div class="separator"></div>
             </div>
             
@@ -182,10 +361,10 @@
             <div class="sec-title">
             	<div class="clearfix">
                 	<div class="pull-left">
-                    	<h2>{{ $contact->title }}</h2>
+                    	<h2>{{ __('contact.title') }}</h2>
                         <div class="separator"></div>
                     </div>
-                    <div class="text">{{$contact->description}}</div>
+                    <div class="text">{{ $contact->getTranslation('description', app()->getLocale()) }}</div>
                 </div>
             </div>
         
@@ -197,21 +376,12 @@
                     	<div class="inner-column">
                         	<div class="upper-box">
                             	<ul class="list-style-three">
-                                	<li><span class="icon flaticon-technology-2"></span><strong>{{ $contact->phone_title }} </strong>{{ $contact->phone_description }}</li>
-                                    <li><span class="icon flaticon-envelope-1"></span><strong>{{ $contact->adres_title }} </strong>{{ $contact->adres_description }}</li>
-                                    <li><span class="icon flaticon-time-1"></span><strong>{{ $contact->hour_title }} </strong>{{ $contact->hour_description }}</li>
+                                	<li><span class="icon flaticon-technology-2"></span><strong>{{ $contact->getTranslation('phone_title') }} </strong>{{ $contact->getTranslation('phone_description') }}</li>
+                                    <li><span class="icon flaticon-envelope-1"></span><strong>{{ $contact->getTranslation('adres_title') }} </strong>{{ $contact->getTranslation('adres_description') }}</li>
+                                    <li><span class="icon flaticon-time-1"></span><strong>{{ $contact->getTranslation('hour_title') }} </strong>{{ $contact->getTranslation('hour_description') }}</li>
                                 </ul>
                             </div>
-                            <div class="lower-box">
-                            	<div class="lower-inner">
-                                	<div class="image">
-                                    	<img src="{{ asset('frontend/assets/images/resource/author-7.jpg') }}" alt="" />
-                                    </div>
-                                    <h3>Jenifer Hearly</h3>
-                                    <div class="designation">Manager</div>
-                                    <div class="emailed">Jenifer@Metroindustry.com</div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     
@@ -220,24 +390,54 @@
     <div class="inner-column">
         <!-- Contact Form -->
         <div class="contact-form">
+            <!-- Success/Error Messages -->
+            @if(session('success'))
+                <div class="alert alert-success" style="background-color: #d4edda; color: #155724; padding: 15px; margin-bottom: 20px; border: 1px solid #c3e6cb; border-radius: 4px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <i class="fa fa-check-circle" style="margin-right: 8px; font-size: 16px;"></i> 
+                    <strong>Başarılı!</strong> {{ session('success') }}
+                    <button type="button" class="close-alert" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 18px; color: #155724; cursor: pointer;">&times;</button>
+                </div>
+            @endif
+            
+            @if(session('error'))
+                <div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 15px; margin-bottom: 20px; border: 1px solid #f5c6cb; border-radius: 4px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <i class="fa fa-exclamation-circle" style="margin-right: 8px; font-size: 16px;"></i> 
+                    <strong>Hata!</strong> {{ session('error') }}
+                    <button type="button" class="close-alert" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 18px; color: #721c24; cursor: pointer;">&times;</button>
+                </div>
+            @endif
+            
+            @if($errors->any())
+                <div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 15px; margin-bottom: 20px; border: 1px solid #f5c6cb; border-radius: 4px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <i class="fa fa-exclamation-circle" style="margin-right: 8px; font-size: 16px;"></i> 
+                    <strong>Hata!</strong> Lütfen aşağıdaki hataları düzeltin:
+                    <button type="button" class="close-alert" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 18px; color: #721c24; cursor: pointer;">&times;</button>
+                    <ul style="margin: 10px 0 0 0; padding-left: 20px;">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            
             <!--Default Form-->
             <form method="POST" action="{{ route('contact.message.store') }}" id="contact-form">
                 @csrf
                 <div class="row clearfix">
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                        <input type="text" name="name" placeholder="Ad Soyad" required>
+                        <input type="text" name="name" placeholder="{{ __('contact.name') }}" required>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                        <input type="email" name="email" placeholder="E-Mail" required>
+                        <input type="email" name="email" placeholder="{{ __('contact.email') }}" required>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                        <input type="text" name="phone" placeholder="Telefon">
+                        <input type="text" name="phone" placeholder="{{ __('contact.phone') }}">
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                        <textarea name="message" placeholder="Mesajınız" required></textarea>
+                        <textarea name="message" placeholder="{{ __('contact.message') }}" required></textarea>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                        <button class="theme-btn submit-btn" type="submit" name="submit-form">Gönder <span class="icon flaticon-right-arrow-1"></span></button>
+                        <button class="theme-btn submit-btn" type="submit" name="submit-form">{{ __('contact.send_message') }} <span class="icon flaticon-right-arrow-1"></span></button>
                     </div>
                 </div>
             </form>
@@ -251,149 +451,11 @@
         </div>
     </section>
     
-    <!--Quote Form-->
-    <div class="modal fade" id="schedule-box" tabindex="-1" role="dialog">
-      <div class="modal-dialog popup-container container" role="document">
-        <div class="modal-content">
-            <div class="appoinment_form_wrapper clear_fix">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
-                <div class="get-quote-form" style="background-image:url({{ asset('frontend/assets/images/background/13.jpg') }})">
-                	<div class="inner-box">
-                    	<!--Sec Title-->
-                        <div class="sec-title">
-                        	<div class="clearfix">
-                            	<div class="pull-left">
-                                	<h2>Get a Quote</h2>
-                                    <div class="separator centered"></div>
-                                </div>
-                                <div class="pull-left">
-                                	<div class="text">Get a free quote for your industrial or engineering business solutions, We are here 24/7.</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Quote Form / Style Two-->
-                        <div class="quote-form style-two">
-                            <!--Shipping Form-->
-                            <form method="post" action="contact.html">
-                                <div class="row clearfix">
-                                	<div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="text" placeholder="Your Name" required>
-                                    </div>
-                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="text" placeholder="Company Name" required>
-                                    </div>
-                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="text" placeholder="Phone" required>
-                                    </div>
-                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <select class="custom-select-box">
-                                            <option>Select Needed Service</option>
-                                            <option>Services One</option>
-                                            <option>Services Two</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                        <textarea placeholder="Your Message..."></textarea>
-                                    </div>
-                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                        <button class="theme-btn btn-style-one" type="submit" name="submit-form">Send Now <span class="icon flaticon-arrow-pointing-to-right"></span></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div> 
-        </div> 
-      </div> 
-      <a href="index.html" class="backhome">Back to Home <span class="icon flaticon-arrow-pointing-to-right"></span></a>
-    </div>
-    <!-- End of Quote box -->
+
 
     
     <!--Main Footer-->
-    <footer class="main-footer">
-    	<div class="auto-container">
-        	<!--Widgets Section-->
-            <div class="widgets-section">
-            	<div class="row clearfix">
-                	
-                    <!--Column-->
-                    <div class="column col-md-5 col-sm-6 col-xs-12">
-						<div class="footer-widget logo-widget">
-							<div class="logo">
-                            	<a href="index.html"><img src="{{ asset('frontend/assets/images/footer-logo.png') }}" alt="" /></a>
-                            </div>
-                            <div class="widget-content">
-                            	<div class="text">Global Street 5004, Newyork, United States.</div>
-                                <ul class="list">
-                                	<li>+0 625-07520-6644 </li>
-                                    <li>Mailus@Metroindustry.com</li>
-                                </ul>
-                                <div class="timing">
-                                	<span>Visit Our Office:</span>Monday - Satday: 9.00am to 5.00pm
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!--Column-->
-                    <div class="column col-md-4 col-sm-6 col-xs-12">
-						<div class="footer-widget links-widget">
-                        	<div class="footer-title">
-                            	<h2>Usefull Links</h2>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="column col-md-6 col-sm-6 col-xs-12">
-                                	<ul class="links">
-                                    	<li><a href="about.html">Hakkımızda</a></li>
-                                        <li><a href="#">Meet Our Team</a></li>
-                                        <li><a href="#">Case Studies</a></li>
-                                        <li><a href="#">Get a Quote</a></li>
-                                        <li><a href="#">Testimonials</a></li>
-                                        <li><a href="#">İletişim</a></li>
-                                    </ul>
-                                </div>
-                                <div class="column col-md-6 col-sm-6 col-xs-12">
-                                	<ul class="links">
-                                    	<li><a href="market-sectors.html">Ürünler</a></li>
-                                        <li><a href="#">Industries</a></li>
-                                        <li><a href="#">News</a></li>
-                                        <li><a href="#">Why Choose Us</a></li>
-                                        <li><a href="#">Sustainability</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!--Column-->
-                    <div class="column col-md-3 col-sm-6 col-xs-12">
-						<div class="footer-widget material-widget">
-                        	
-                         
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-        	<div class="auto-container">
-                <div class="row clearfix">
-                    
-                   
-                    </div>
-                    
-                </div>
-                
-                <div class="copyright">Copyright © 2025 <a href="#">The Metron Industry</a> Theme by <a href="#">Themekalia.</a> All rights reserved.</div>
-                
-            </div>
-        </div>
-    </footer>
+    @include('frontend.layouts.footer')
     
 </div>
 <!--End pagewrapper-->
@@ -412,6 +474,66 @@
 <script src="{{ asset('frontend/assets/js/script.js') }}"></script>
 <!--Google Map APi Key-->
 <!--End Google Map APi-->
+
+<script>
+// Başarılı ve hata mesajlarını otomatik olarak gizle
+document.addEventListener('DOMContentLoaded', function() {
+    // Close butonları için event listener
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('close-alert')) {
+            const alert = e.target.closest('.alert');
+            if (alert) {
+                alert.style.transition = 'opacity 0.5s ease-out';
+                alert.style.opacity = '0';
+                setTimeout(function() {
+                    alert.style.display = 'none';
+                }, 500);
+            }
+        }
+    });
+    
+    // Başarılı mesajları 5 saniye sonra gizle
+    const successAlerts = document.querySelectorAll('.alert-success');
+    successAlerts.forEach(function(alert) {
+        setTimeout(function() {
+            if (alert.style.display !== 'none') {
+                alert.style.transition = 'opacity 0.5s ease-out';
+                alert.style.opacity = '0';
+                setTimeout(function() {
+                    alert.style.display = 'none';
+                }, 500);
+            }
+        }, 5000);
+    });
+    
+    // Hata mesajlarını 8 saniye sonra gizle
+    const errorAlerts = document.querySelectorAll('.alert-danger');
+    errorAlerts.forEach(function(alert) {
+        setTimeout(function() {
+            if (alert.style.display !== 'none') {
+                alert.style.transition = 'opacity 0.5s ease-out';
+                alert.style.opacity = '0';
+                setTimeout(function() {
+                    alert.style.display = 'none';
+                }, 500);
+            }
+        }, 8000);
+    });
+    
+    // Form gönderildikten sonra mesajları temizle
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function() {
+            // Form gönderilirken butonu devre dışı bırak
+            const submitBtn = this.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Gönderiliyor... <span class="icon flaticon-right-arrow-1"></span>';
+            }
+        });
+    }
+});
+</script>
 <a href="https://wa.me/+905304702653" class="whatsapp-button" target="_blank" rel="noopener noreferrer" style="position: fixed; bottom: 30px; right: 30px; z-index: 9999; background-color: #25d366; border-radius: 5px; padding: 8px 16px; display: flex; align-items: center; text-decoration: none;">
         <img src="{{ asset('WhatsAppButtonGreenLarge.svg') }}" alt="Chat on WhatsApp" style="height: 30px; vertical-align: middle; margin-right: 8px">
         <span style="font-size: 16px; color: white; vertical-align: middle">

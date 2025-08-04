@@ -14,22 +14,13 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('title_1')->nullable();
-            $table->string('image_1')->nullable();
-             $table->string('title_2')->nullable();
-            $table->string('image_2')->nullable();
-
-             $table->string('title_3')->nullable();
-            $table->string('image_3')->nullable();
-
-             $table->string('title_4')->nullable();
-            $table->string('image_4')->nullable();
-
-
-
+            $table->string('title_2')->nullable();
+            $table->string('title_3')->nullable();
+            $table->string('title_4')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

@@ -1,5 +1,17 @@
 <div class="navbar-bg"></div>
       <nav class="navbar navbar-expand-lg main-navbar">
+        <!-- Mobile Sidebar Toggle Button -->
+        <button class="sidebar-toggle d-lg-none">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <!-- ALESMAK Logo -->
+        <div class="navbar-brand d-none d-lg-block">
+          <a href="{{ route('dashboard') }}">
+            <img src="{{ asset('images/alesmaklogo.png') }}" alt="ALESMAK Logo" style="height: 35px; width: auto; background: transparent;">
+          </a>
+        </div>
+        
         <div class="form-inline mr-auto"></div>
         <ul class="navbar-nav navbar-right">
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -28,10 +40,14 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            <a href="{{ route('dashboard') }}">
+              <img src="{{ asset('images/alesmaklogo.png') }}" alt="ALESMAK Logo" style="height: 40px; width: auto; background: transparent;">
+            </a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="{{ route('dashboard') }}">
+              <img src="{{ asset('images/alesmaklogo.png') }}" alt="ALESMAK" style="height: 30px; width: auto; background: transparent;">
+            </a>
           </div>
           <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>

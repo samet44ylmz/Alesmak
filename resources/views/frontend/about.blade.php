@@ -10,12 +10,12 @@
                 <div class="content-column col-md-6 col-sm-12 col-xs-12">
                 	<div class="inner-column">
                     	<div class="sec-title">
-                        	<h2>{{ $about->title }}</h2>
+                        	<h2>{{ __("about.title") }}</h2>
                             <div class="separator centered"></div>
                         </div>
-                        <div class="bold-text">We Providing Best Indutrial Solution For Our Customers Business Growing In Last 25+ Years.</div>
+                        <div class="bold-text">{{ __("about.subtitle") }}</div>
                         <div class="text">
-                            <p>{{ $about->description}}</p>
+                            <p>{{ $about->getTranslation('description', app()->getLocale()) }}</p>
                         </div>
                         <div class="signature"><img src="{{ asset($about->image) }}" alt="" /></div>
                     </div>
@@ -49,10 +49,10 @@
                 	<div class="inner-column" style="background:none !important; opacity:1 !important;">
                         <div class="upper-box">
                             <div class="icon flaticon-target"></div>
-                            <h2>{{ $about->title_2 }}</h2>
+                            <h2>{{ $about->getTranslation('title_2', app()->getLocale()) }}</h2>
                         </div>
-                        <div class="text">{{ $about->description_2 }}</div>
-                        <a href="market-sectors.html" class="services">{{ $about->btn_text }} <span class="icon flaticon-arrow-pointing-to-right"></span></a>
+                        <div class="text">{{ $about->getTranslation('description_2', app()->getLocale()) }}</div>
+                        <a href="{{ route('contact') }}" class="services">{{ $about->getTranslation('btn_text', app()->getLocale()) }} <span class="icon flaticon-arrow-pointing-to-right"></span></a>
                     </div>
                 </div>
                 

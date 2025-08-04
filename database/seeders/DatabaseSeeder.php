@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::factory(1)->create();
-        }
+        
+        // Contact seeder'ını çalıştır
+        $this->call(ContactSeeder::class);
+    }
 }

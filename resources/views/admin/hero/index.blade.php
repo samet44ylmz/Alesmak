@@ -26,27 +26,21 @@
                       @method('PUT')
 
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Başlık</label>
                       <div class="col-sm-12 col-md-7">
                         <input type="text" name="title" class="form-control" value="{{ $hero->title }}">
                       </div> 
                     </div>
-
-                      <div class="card-body">
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Açıklama</label>
                       <div class="col-sm-12 col-md-7">
-                        <textarea name="description" id="" class="form-control" style="height: 100px">{{$hero->description}}</textarea>
+                        <textarea name="description" class="form-control" style="height: 100px">{{ $hero->description }}</textarea>
                       </div>
                     </div>
-
-
-
-                     <div class="card-body">
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Button Text</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Buton Metni</label>
                       <div class="col-sm-12 col-md-7">
-                         <textarea name="btn_text" id="" class="form-control">{{$hero->btn_text}}</textarea>
+                        <input type="text" name="btn_text" class="form-control" value="{{ $hero->btn_text }}">
                       </div>
                     </div>
 
@@ -54,7 +48,7 @@
                 <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Preview Image</label>
                     <div class="col-sm-12 col-md-7">
-                        <img class="w-25" src="{{ asset($hero->image) }}" alt="">
+                        <img class="img-fluid w-100" style="max-width: 300px;" src="{{ asset($hero->image) }}" alt="">
                     </div>
                 </div>
                @endif
@@ -81,7 +75,6 @@
 
                      
                     
-
 
 
                   </div>

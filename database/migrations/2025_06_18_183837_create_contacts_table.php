@@ -11,22 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
-           
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
-            $table->string('adres_title')->nullable();
-            $table->text('adres_description')->nullable();
-            $table->string('phone_title')->nullable();
-            $table->text('phone_description')->nullable();
-            $table->string('hour_title')->nullable();
-            $table->text('hour_description')->nullable();
-            $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();           
-            $table->text('message')->nullable();
-            $table->timestamps();
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->json('title')->nullable()->change();
+            $table->json('description')->nullable()->change();
+            $table->json('adres_title')->nullable()->change();
+            $table->json('adres_description')->nullable()->change();
+            $table->json('phone_title')->nullable()->change();
+            $table->json('phone_description')->nullable()->change();
+            $table->json('hour_title')->nullable()->change();
+            $table->json('hour_description')->nullable()->change();
         });
     }
 
