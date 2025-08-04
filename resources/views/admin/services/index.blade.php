@@ -140,7 +140,7 @@
                       <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Başlık</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="title_1" class="form-control" value="{{ $services->title_1  }}">
+                        <input type="text" name="title_1" class="form-control" value="{{ $services->getTranslation('title_1', 'tr') }}" placeholder="1. ürün başlığı">
                       </div> 
                     </div>
 
@@ -169,7 +169,7 @@
                       <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Başlık</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="title_2" class="form-control" value="{{ $services->title_2 }}">
+                        <input type="text" name="title_2" class="form-control" value="{{ $services->getTranslation('title_2', 'tr') }}" placeholder="2. ürün başlığı">
                       </div> 
                     </div>
 
@@ -200,7 +200,7 @@
                       <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Başlık</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="title_3" class="form-control" value="{{ $services->title_3  }}">
+                        <input type="text" name="title_3" class="form-control" value="{{ $services->getTranslation('title_3', 'tr') }}" placeholder="3. ürün başlığı">
                       </div> 
                     </div>
 
@@ -234,7 +234,7 @@
                       <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Başlık</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="title_4" class="form-control" value="{{ $services->title_4  }}">
+                        <input type="text" name="title_4" class="form-control" value="{{ $services->getTranslation('title_4', 'tr') }}" placeholder="4. ürün başlığı">
                       </div> 
                     </div>
 

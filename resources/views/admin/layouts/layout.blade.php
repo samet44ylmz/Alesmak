@@ -55,6 +55,9 @@
       z-index: 1000;
       height: 100vh;
       overflow-y: auto;
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e3e6f0;
     }
     
     .main-sidebar.show {
@@ -97,10 +100,16 @@
       font-size: 0.9rem;
     }
     
-    /* Mobilde navbar düzenlemesi */
-    .navbar {
-      padding: 0.5rem 1rem;
-    }
+         /* Mobilde navbar düzenlemesi */
+     .navbar {
+       padding: 0.5rem 1rem;
+     }
+     
+     /* Sidebar toggle butonu navbar konumu */
+     .navbar .sidebar-toggle {
+       margin-right: 1rem;
+       z-index: 1001;
+     }
     
     .navbar-nav .nav-link {
       padding: 0.5rem 0.75rem;
@@ -110,11 +119,22 @@
     .sidebar-menu .nav-link {
       padding: 0.75rem 1rem;
       font-size: 0.9rem;
+      border-radius: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .sidebar-menu .nav-link:hover {
+      background-color: #f8f9fa;
+      color: #333;
     }
     
     .sidebar-menu .menu-header {
       padding: 0.5rem 1rem;
       font-size: 0.8rem;
+      font-weight: 600;
+      color: #6c757d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
     /* Mobilde form elemanları */
@@ -200,22 +220,54 @@
       min-width: 200px;
     }
     
-    /* Mobilde sidebar toggle butonu */
-    .sidebar-toggle {
-      font-size: 1rem;
-      padding: 0.25rem 0.5rem;
-    }
+         /* Mobilde sidebar toggle butonu */
+     .sidebar-toggle {
+       font-size: 1rem;
+       padding: 0.5rem 0.75rem;
+       background: #007bff;
+       border: 2px solid #007bff;
+       color: #fff;
+       border-radius: 5px;
+       box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+       min-width: 44px;
+       min-height: 44px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+     }
+     
+     .sidebar-toggle:hover {
+       background: #0056b3;
+       border-color: #0056b3;
+       box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+     }
   }
 
   /* Sidebar Toggle Button */
   .sidebar-toggle {
     display: none;
-    background: none;
-    border: none;
+    background: #007bff;
+    border: 2px solid #007bff;
     color: #fff;
     font-size: 1.2rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0.75rem;
     cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+  }
+
+  .sidebar-toggle:hover {
+    background: #0056b3;
+    border-color: #0056b3;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+  }
+
+  .sidebar-toggle:active {
+    transform: scale(0.95);
+    box-shadow: 0 1px 2px rgba(0, 123, 255, 0.3);
   }
 
   @media (max-width: 768px) {
@@ -234,10 +286,13 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
+    backdrop-filter: blur(2px);
+    transition: opacity 0.3s ease;
   }
 
   .sidebar-overlay.show {
     display: block;
+    opacity: 1;
   }
 
   /* Logo responsive ayarları */
@@ -275,6 +330,34 @@
     overflow: hidden;
     position: fixed;
     width: 100%;
+  }
+
+  /* Mobilde sidebar animasyonları */
+  @media (max-width: 768px) {
+    .main-sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .main-sidebar.show {
+      transform: translateX(0);
+    }
+    
+    /* Sidebar içeriği için scroll */
+    .main-sidebar .sidebar-menu {
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Sidebar toggle butonu animasyonu */
+    .sidebar-toggle {
+      transition: transform 0.3s ease;
+    }
+    
+    .sidebar-toggle:active {
+      transform: scale(0.95);
+    }
   }
 
   /* Mobilde touch hedef boyutları */
@@ -403,7 +486,9 @@
   // Mobile sidebar toggle functionality
   $(document).ready(function() {
     // Sidebar toggle
-    $('.sidebar-toggle').on('click', function() {
+    $('.sidebar-toggle').on('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
       $('.main-sidebar').toggleClass('show');
       $('#sidebarOverlay').toggleClass('show');
       $('body').toggleClass('sidebar-open');
@@ -430,6 +515,15 @@
     // Handle window resize
     $(window).on('resize', function() {
       if ($(window).width() > 768) {
+        $('.main-sidebar').removeClass('show');
+        $('#sidebarOverlay').removeClass('show');
+        $('body').removeClass('sidebar-open');
+      }
+    });
+
+    // ESC tuşu ile sidebar'ı kapat
+    $(document).on('keydown', function(e) {
+      if (e.key === 'Escape' && $(window).width() <= 768) {
         $('.main-sidebar').removeClass('show');
         $('#sidebarOverlay').removeClass('show');
         $('body').removeClass('sidebar-open');

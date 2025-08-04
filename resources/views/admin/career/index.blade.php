@@ -26,25 +26,25 @@
                       @method('PUT')
 
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Başlık</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" name="title" class="form-control" value="{{ $career->title }}">
+                        <input type="text" name="title" class="form-control" value="{{ $career->getTranslation('title', 'tr') }}" placeholder="Başlık giriniz">
                       </div> 
                     </div>
 
                       <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Açıklama</label>
                       <div class="col-sm-12 col-md-7">
-                        <textarea name="description" class="form-control" style="height: 100px">{{ $career->description }}</textarea>
+                        <textarea name="description" class="form-control" style="height: 100px" placeholder="Açıklama giriniz">{{ $career->getTranslation('description', 'tr') }}</textarea>
                       </div>
                     </div>
 
 
 
                      <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Button Text</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Buton Metni</label>
                       <div class="col-sm-12 col-md-7">
-                         <textarea name="btn_text" class="form-control">{{ $career->btn_text }}</textarea>
+                         <textarea name="btn_text" class="form-control" placeholder="Buton metni giriniz">{{ $career->getTranslation('btn_text', 'tr') }}</textarea>
                       </div>
                     </div>
 
